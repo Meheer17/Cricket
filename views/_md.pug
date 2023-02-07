@@ -1,0 +1,53 @@
+<div class="mb-4 w-full bg-gray-50 rounded-lg border border-gray-200 mt-5">
+    <div class="flex justify-between items-center py-2 px-3 border-b ">
+       <div class="flex flex-wrap items-center divide-gray-200">
+           <div class="flex items-center space-x-1 sm:pr-4">
+              .p-1.text-gray-500.cursor-pointer(onclick=(`doMagic(' *Type Here* ')`) class="hover:text-gray-900 hover:bg-gray-300")
+                <span class="text-xl mx-auto iconify" data-icon="material-symbols:format-italic"></span>
+              .p-1.text-gray-500.cursor-pointer(onclick=(`doMagic(' **Type Here** ')`) class="hover:text-gray-900 hover:bg-gray-300")
+                <span class="text-xl mx-auto iconify" data-icon="material-symbols:format-bold"></span>
+              .p-1.text-gray-500.cursor-pointer(onclick=(`doMagic(' [text here](link here) ')`) class="hover:text-gray-900 hover:bg-gray-300")
+                  <span class="text-xl mx-auto iconify" data-icon="material-symbols:add-link"></span> 
+              .p-1.text-gray-500.cursor-pointer(onclick=(`doMagic(' <span class="underline"> Type Something Here </span>')`) class="hover:text-gray-900 hover:bg-gray-300")
+                  <span class="text-xl mx-auto iconify" data-icon="material-symbols:format-underlined"></span>
+              .p-1.text-gray-500.cursor-pointer(onclick=(`doMagic(' > Type here ')`) class="hover:text-gray-900 hover:bg-gray-300")
+                  <span class="text-xl mx-auto iconify" data-icon="tabler:blockquote"></span>
+              .p-1.text-gray-500.cursor-pointer(onclick=(`doMagic(' ~~Type here~~ ')`) class="hover:text-gray-900 hover:bg-gray-300")
+                  <span class="text-xl mx-auto iconify" data-icon="dashicons:editor-strikethrough"></span>
+           </div>
+           <div class="flex flex-wrap items-center space-x-1 sm:pl-4">
+              .p-1.text-gray-500.cursor-pointer(onclick=(`doMagic(' <div class="text-center"> Type Something Here </div>')`) class="hover:text-gray-900 hover:bg-gray-300")
+                  <span class="text-xl mx-auto iconify" data-icon="ph:text-align-center"></span>
+              .p-1.text-gray-500.cursor-pointer(onclick=(`doMagic(' <div class="text-left"> Type Something Here </div>')`) class="hover:text-gray-900 hover:bg-gray-300")
+                  <span class="text-xl mx-auto iconify" data-icon="ph:text-align-left"></span>
+              .p-1.text-gray-500.cursor-pointer(onclick=(`doMagic(' <div class="text-right"> Type Something Here </div>')`) class="hover:text-gray-900 hover:bg-gray-300")
+                  <span class="text-xl mx-auto iconify" data-icon="ph:text-align-right"></span>
+              .p-1.text-gray-500.cursor-pointer(onclick=(`doMagic(' <div class="text-justify"> Type Something Here </div>')`) class="hover:text-gray-900 hover:bg-gray-300")
+                  <span class="text-xl mx-auto iconify" data-icon="ph:text-align-justify"></span>
+           </div>
+           <div class="flex flex-wrap items-center space-x-1 sm:pl-4">
+              .p-1.text-gray-500.cursor-pointer(onclick=(`doMagic(' # ')`) class="hover:text-gray-900 hover:bg-gray-300")
+                  <span class="text-xl mx-auto iconify" data-icon="bi:type-h1"></span>
+              .p-1.text-gray-500.cursor-pointer(onclick=(`doMagic(' ## ')`) class="hover:text-gray-900 hover:bg-gray-300")
+                  <span class="text-xl mx-auto iconify" data-icon="bi:type-h2"></span>
+              .p-1.text-gray-500.cursor-pointer(onclick=(`doMagic(' ### ')`) class="hover:text-gray-900 hover:bg-gray-300")
+                  <span class="text-xl mx-auto iconify" data-icon="bi:type-h3"></span>
+           </div>
+           <div class="flex flex-wrap items-center space-x-1 sm:pl-4">
+              .p-1.text-gray-500.cursor-pointer(onclick=(`doMagic(' ![alternative text](link here) ')`) class="hover:text-gray-900 hover:bg-gray-300")
+                  <span class="text-xl mx-auto iconify" data-icon="material-symbols:image-outline-sharp"></span>
+              .p-1.text-gray-500.cursor-pointer(onclick=(`doMagic(' - text here ')`) class="hover:text-gray-900 hover:bg-gray-300")
+                  <span class="text-xl mx-auto iconify" data-icon="ph:list-bullets-bold"></span>
+              .p-1.text-gray-500.cursor-pointer(onclick=(`doMagic(' 1. Text here ')`) class="hover:text-gray-900 hover:bg-gray-300")
+                  <span class="text-xl mx-auto iconify" data-icon="material-symbols:format-list-numbered"></span>
+           </div>
+       </div>
+    </div>
+    <div class="py-2 px-4 bg-white rounded-b-lg dark:bg-gray-800">
+        <label for="markdown" class="sr-only">Publish post</label>
+        textarea(id="markdown" name="markdown" rows="8" class="block px-0 w-full text-sm text-gray-800 bg-white border-0 dark:bg-gray-800 focus:ring-0 dark:text-white dark:placeholder-gray-400" placeholder="Write an article..." required)= data.markdown
+    </div>
+</div>
+<button type="submit" class="inline-flex items-center px-5 py-2.5 text-sm font-medium text-center text-white bg-blue-700 rounded-lg focus:ring-4 focus:ring-blue-200 dark:focus:ring-blue-900 hover:bg-blue-800">
+    Publish post
+</button>

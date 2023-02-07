@@ -1,0 +1,112 @@
+doctype html
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    meta(http-equiv="X-UA-Compatible", content="IE=edge")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    script(src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp")
+    link(rel="icon" href="/logo.jpg")
+    script(src="https://code.iconify.design/2/2.2.1/iconify.min.js")
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer")
+    link(rel="stylesheet" href="/main.css")
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer")
+    title Edit
+
+  body.bg-slate-200.min-h-screen(class="flex flex-col")
+    include _nav.pug
+    .cont.mx-auto.mt-10.z-10.grow
+
+      - if ((page == "blogs" || page == "talent-spotting" || page == "news" || page == "gully-cricket-chronicles") && page != "video" && page != "talent-spotting")
+        form(action=`/${page}/edit/${data.slug}?_method=PUT` method="post")
+
+          label(for="title").text-slate-700.text-left.text-xl.font-bold.block Title
+            textarea#title(type="text" rows='2' name="title" required).resize-none.overflow-hidden.mt-2.w-full.bg-blue-100.h-10.p-2.border-slate-300.border-2= data.title
+          label(for="summary").text-slate-700.text-left.text-xl.font-bold.block.mt-6 Summary
+            textarea#summary(type="text" rows="5" name="summary" required).text-lg.mt-2.w-full.bg-blue-100.p-3.border-slate-300.border-2= data.summary
+          
+          .border-2.border-slate-600.mt-4.p-3
+            .text-center.font-serif Your Images
+            .grid.grid-cols-4.gap-2.mt-4
+              each i in data.images
+                img.h-full(src=`${i.link}` onclick=(`doMagic('![image](${i.link})')`))
+            
+          .max-w-4xl.mx-auto.mt-5
+              .border-2.border-slate-600.mt-4.p-3
+                .text-center.font-serif Select Your Main Background Image
+                .grid.grid-cols-4.gap-2.mt-4
+                  each i in data.images
+                    div.hiddenradio
+                      label
+                        input(type="radio" name="image" value=`${i.link}` checked)
+                        img.h-full(src=`${i.link}`)
+          .mx-auto.max-w-xl.mt-5.p-5.text-center
+            a.font-serif.bg-sky-300.p-4(href=`/${page}/new/image/${data.slug}`) Add More Images 
+
+          include _md.pug
+
+      - if (page == 'video')   
+        form(action=`/${page}/edit/${data.slug}?_method=PUT` method="post")
+
+          label(for="vt").text-slate-700.text-left.text-xl.font-bold.block Title
+            textarea#vt(type="text" rows='2' name="vt" required).resize-none.overflow-hidden.mt-2.w-full.bg-blue-100.h-10.p-2.border-slate-300.border-2= data.title
+          label(for="link").text-slate-700.text-left.text-xl.font-bold.block.mt-6 Link
+            textarea#link(type="text" rows="1" name="link" required).text-lg.mt-2.w-full.bg-blue-100.p-3.border-slate-300.border-2= data.link
+          include _md.pug
+      
+      - if (page == "talent-spotting")
+        form(action=`/${page}/edit/${data.slug}?_method=PUT` method="post")
+          label(for="name").text-slate-700.text-left.text-xl.font-bold.block name
+            textarea#name(type="text" rows='2' name="name" required).resize-none.overflow-hidden.mt-2.w-full.bg-blue-100.h-10.p-2.border-slate-300.border-2= data.name
+          label(for="age").text-slate-700.text-left.text-xl.font-bold.block Age 
+            textarea(type="number" name="age" required).bg-blue-100.border-2.border-slate-300.mt-2.w-full.mb-3= data.age
+          label(for="place").text-slate-700.text-left.text-xl.font-bold.block Place
+            textarea(type="text" name="place" required).bg-blue-100.border-2.border-slate-300.mt-2.w-full= data.place
+          label(for="sum").text-slate-700.text-left.text-xl.font-bold.block.mt-6 Summary
+            textarea#sum(type="text" rows="5" name="sum" required).text-lg.mt-2.w-full.bg-blue-100.p-3.border-slate-300.border-2= data.summary
+              
+          .border-2.border-slate-600.mt-4.p-3
+            .text-center.font-serif Your Images
+            .grid.grid-cols-4.gap-2.mt-4
+              each i in data.images
+                img.h-full(src=`${i.link}` onclick=(`doMagic('![image](${i.link})')`))
+          
+          .max-w-4xl.mx-auto.mt-5
+              .border-2.border-slate-600.mt-4.p-3
+                .text-center.font-serif Select Your Main Background Image
+                .grid.grid-cols-4.gap-2.mt-4
+                  each i in data.images
+                    div.hiddenradio
+                      label
+                        input(type="radio" name="image" value=`${i.link}` checked)
+                        img.h-full(src=`${i.link}`)
+                        
+
+          include _md.pug
+
+    .flex-none
+      include _footer.pug
+    script.
+      const boxes = document.querySelectorAll('.box1, .box2, .box3, .box4, .box5, .box6');
+      for (const box of boxes) {
+      box.addEventListener('click', function handleClick() {
+      box.classList.add('cursor-wait');
+      });
+      }
+
+      function doMagic(text){    
+      var homeTown = text
+      document.getElementById("markdown").value += '\n'+ homeTown;
+      }
+
+      const sup2 = document.querySelector('.btn');
+      const sup = document.querySelector('#hello');
+      function showv(){
+      sup.classList.remove('hidden')
+      sup2.classList.remove('hidden')
+      }
+      const message = document.querySelector('#hello');
+      sup2.addEventListener('click', function () {
+      const fixed = message.value.replace('watch?v=','embed/')
+      const data = ` <iframe class="h.96 w-full" src='${fixed}'>`
+      doMagic(data)
+      });

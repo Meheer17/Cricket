@@ -1,0 +1,192 @@
+doctype html
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    meta(http-equiv="X-UA-Compatible", content="IE=edge")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    script(src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp")
+    link(rel="icon" href="/logo.jpg")
+    link(rel="stylesheet" href="/main.css")
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer")
+    title Home
+
+  body.bg-slate-200.min-h-screen(class="flex flex-col")
+    include _nav.pug
+    .cont.mx-auto.mt-10.z-10.grow(class="md:p-0 p-2")
+      if news[0]
+        .grid.grid-cols-1
+          .max-w-full.bg-gray-800.relative.overflow-hidden(class="md:h-96")
+            a.flex.flex-col(href=`/news/read/${news[0].slug}`).overflow-hidden
+              div.overflow-hidden
+                img.h-full.right-0.transition.ease.transition-400(class="md:absolute origin-center w-full sm:block hover:scale-110 md:w-1/2" src=`${news[0].mainImg}`)
+              div
+                h1.text-2xl.font-bold.m-10.text-left.text-slate-50.transition-300(class="md:text-5xl w-full md:w-1/3 hover:underline")= news[0].title
+            .text-slate-400.mx-10.my-5(class="text-xl md:absolute md:bottom-12 md:mx-0 md:my-0 md:left-10")= news[0].author 
+            .text-slate-400.mx-10.my-5.text-sm(class="md:absolute md:bottom-8 md:mx-0 md:my-0 md:left-10")= news[0].date.toDateString()
+
+      
+      .mt-10.hidden(class="md:grid md:grid-cols-5 h-auto md:gap-4")
+        if blog[0]
+          a(href=`/blogs/read/${blog[0].slug}`)
+            div 
+              div.overflow-hidden
+                img.h-48.overflow-hidden.transition.ease.transition-400(class="hover:scale-110" src=`${blog[0].mainImg}`)
+            .font-bold.mt-4.text-left.text-slate-900.transition-300(class="text-2xl block w-full hover:underline")= blog[0].title
+            .text-left.text-gray-600.text-sm.mt-2= blog[0].author 
+            .text-left.text-gray-600.text-sm= blog[0].date.toDateString()
+
+        if video[0]
+          a(href=`/video/watch/${video[0].slug}`)
+            div 
+              div.overflow-hidden
+                img.h-48.overflow-hidden.transition.ease.transition-400(class="hover:scale-110" src=`https://img.youtube.com/vi/${video[0].linkimg}/0.jpg`)
+            .font-bold.mt-4.text-left.text-slate-900.transition-300(class="text-2xl block w-full hover:underline")= video[0].title
+            .text-left.text-gray-600.text-sm.mt-2= video[0].author 
+            .text-left.text-gray-600.text-sm= video[0].date
+
+        if gcc[0]
+          a(href=`/gully-cricket-chronicles/read/${gcc[0].slug}`)
+            div 
+              div.overflow-hidden
+                img.h-48.overflow-hidden.transition.ease.transition-400(class="hover:scale-110" src=`${gcc[0].mainImg}`)
+            .font-bold.mt-4.text-left.text-slate-900.transition-300(class="text-2xl block w-full hover:underline")= gcc[0].title 
+            .text-left.text-gray-600.text-sm.mt-2= gcc[0].author 
+            .text-left.text-gray-600.text-sm= gcc[0].date.toDateString()
+
+        if ts[0]
+          a(href=`/talent-spotting/read/${ts[0].slug}`)
+            div 
+              div.overflow-hidden
+                img.h-48.overflow-hidden.transition.ease.transition-400(class="hover:scale-110" src=`${ts[0].mainImg}`)
+            .font-bold.mt-4.text-left.text-slate-900.transition-300(class="text-2xl block w-full hover:underline")= ts[0].name
+            .text-left.text-gray-600.text-sm.mt-2= ts[0].author 
+            .text-left.text-gray-600.text-sm= ts[0].date.toDateString()
+
+        if inter[0]
+          a(href=`/interview/read/${inter[0].slug}`)
+            div 
+              div.overflow-hidden
+                img.h-48.overflow-hidden.transition.ease.transition-400(class="hover:scale-110" src=`${inter[0].mainImg}`)
+            .font-bold.mt-4.text-left.text-slate-900.transition-300(class="text-2xl block w-full hover:underline")= inter[0].title 
+            .text-left.text-gray-600.text-sm.mt-2= inter[0].author 
+            .text-left.text-gray-600.text-sm= inter[0].date.toDateString()
+
+      .border-b-2.mt-10.border-slate-900  
+
+      //- News
+      if news
+        .mt-10
+          if news.length != 0
+            .text-left.font-bold.text-lg.underline News
+            a.block(href="/news/explore").text-right.mb-4.font-bold More
+          .grid.grid-cols-1(class="md:grid-cols-5 h-auto gap-4") 
+            - var n = 0
+              each i in news 
+                if n < 5
+                  - n++
+                  a(href=`/news/read/${i.slug}` class="md:border-0 md:mb-0 md:p-0 mb-5 border-2 p-3 border-slate-400")
+                    div 
+                      div.overflow-hidden
+                        img.h-48.overflow-hidden.transition.ease.transition-400(class="md:h-48 h-full w-full hover:scale-110" src=`${i.mainImg}`)
+                    .font-bold.mt-4.text-left.text-slate-900.transition-300(class="text-2xl block w-full hover:underline")= i.title 
+                    .text-left.text-gray-600.text-sm.mt-2= i.author
+                    .text-left.text-gray-600.text-sm= i.date.toDateString()
+
+        
+      //- Blogs
+      if blog
+        .mt-20
+          if blog.length != 0
+            .text-left.font-bold.text-lg.underline Blog
+            a.block(href="/blogs/explore").text-right.mb-4.font-bold More
+          .grid.grid-cols-1(class="md:grid-cols-5 h-auto gap-4") 
+            - var n = 0
+              each i in blog 
+                if n < 5
+                  - n++
+                  a(href=`/blogs/read/${i.slug}` class="md:border-0 md:mb-0 md:p-0 mb-5 border-2 p-3 border-slate-400")
+                    div 
+                      div.overflow-hidden
+                        img.h-48.overflow-hidden.transition.ease.transition-400(class="md:h-48 h-full w-full hover:scale-110" src=`${i.mainImg}`)
+                    .font-bold.mt-4.text-left.text-slate-900.transition-300(class="text-2xl block w-full hover:underline")= i.title 
+                    .text-left.text-gray-600.text-sm.mt-2= i.author
+                    .text-left.text-gray-600.text-sm= i.date.toDateString()
+
+      //- Videos
+      if video
+        .mt-20
+          if video.length != 0
+            .text-left.font-bold.text-lg.underline Video
+            a.block(href="/video/explore").text-right.mb-4.font-bold More
+          .grid.grid-cols-1(class="md:grid-cols-5 h-auto gap-4") 
+            - var n = 0
+              each i in video 
+                if n < 5
+                  - n++
+                  a(href=`/video/watch/${i.slug}` class="md:border-0 md:mb-0 md:p-0 mb-5 border-2 p-3 border-slate-400")
+                    div 
+                      div.overflow-hidden
+                        img.h-48.overflow-hidden.transition.ease.transition-400(class="md:h-48 h-full w-full hover:scale-110"  src=`https://img.youtube.com/vi/${i.linkimg}/0.jpg`)
+                    .font-bold.mt-4.text-left.text-slate-900.transition-300(class="text-2xl block w-full hover:underline")= i.title 
+                    .text-left.text-gray-600.text-sm.mt-2= i.author
+                    .text-left.text-gray-600.text-sm= i.date
+
+      //- Gully cricket chronicles
+      if gcc
+        .mt-20
+          if gcc.length != 0
+            .text-left.font-bold.text-lg.underline Gully Cricket Chronicles
+            a.block(href="/gully-cricket-chronicles/explore").text-right.mb-4.font-bold More
+          .grid.grid-cols-1(class="md:grid-cols-5 h-auto gap-4") 
+            - var n = 0
+              each i in gcc 
+                if n < 5
+                  - n++
+                  a(href=`/gully-cricket-chronicles/read/${i.slug}` class="md:border-0 md:mb-0 md:p-0 mb-5 border-2 p-3 border-slate-400")
+                    div 
+                      div.overflow-hidden
+                        img.h-48.overflow-hidden.transition.ease.transition-400(class="md:h-48 h-full w-full hover:scale-110" src=`${i.mainImg}`)
+                    .font-bold.mt-4.text-left.text-slate-900.transition-300(class="text-2xl block w-full hover:underline")= i.title 
+                    .text-left.text-gray-600.text-sm.mt-2= i.author
+                    .text-left.text-gray-600.text-sm= i.date.toDateString() 
+
+      //- Talent spotting
+      if ts
+        .mt-20
+          if ts.length != 0
+            .text-left.font-bold.text-lg.underline Talent Spotting
+            a.block(href="/talent-spotting/explore").text-right.mb-4.font-bold More
+          .grid.grid-cols-1(class="md:grid-cols-5 h-auto gap-4") 
+            - var n = 0
+              each i in ts 
+                if n < 5
+                  - n++
+                  a(href=`/talent-spotting/read/${i.slug}` class="md:border-0 md:mb-0 md:p-0 mb-5 border-2 p-3 border-slate-400")
+                    div 
+                      div.overflow-hidden
+                        img.h-48.overflow-hidden.transition.ease.transition-400(class="md:h-48 h-full w-full hover:scale-110" src=`${i.mainImg}`)
+                    .font-bold.mt-4.text-left.text-slate-900.transition-300(class="text-2xl block w-full hover:underline")= i.name 
+                    .text-left.text-gray-600.text-sm.mt-2= i.author
+                    .text-left.text-gray-600.text-sm= i.date.toDateString()
+
+      //- Interview
+      if inter
+        .mt-20
+          if ts.length != 0
+            .text-left.font-bold.text-lg.underline Interview
+            a.block(href="/interview/explore").text-right.mb-4.font-bold More
+          .grid.grid-cols-1(class="md:grid-cols-5 h-auto gap-4") 
+            - var n = 0
+              each i in inter 
+                if n < 5
+                  - n++
+                  a(href=`/interview/read/${i.slug}` class="md:border-0 md:mb-0 md:p-0 mb-5 border-2 p-3 border-slate-400")
+                    div 
+                      div.overflow-hidden
+                        img.overflow-hidden.transition.ease.transition-400(class="md:h-48 h-full w-full hover:scale-110" src=`${i.mainImg}`)
+                    .font-bold.mt-4.text-left.text-slate-900.transition-300(class="text-2xl block w-full hover:underline")= i.title 
+                    .text-left.text-gray-600.text-sm.mt-2= i.author
+                    .text-left.text-gray-600.text-sm= i.date.toDateString() 
+        
+    .flex-none
+      include _footer.pug

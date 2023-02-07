@@ -1,0 +1,81 @@
+doctype html
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    meta(http-equiv="X-UA-Compatible", content="IE=edge")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    script(src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp")
+    link(rel="stylesheet" href="/main.css")
+    link(rel="icon" href="/logo.jpg")
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer")
+    title= data.name
+
+  body.bg-slate-200.min-h-screen(class="flex flex-col")
+    include _nav.pug
+    .cont.mx-auto.mt-10.z-10.grow.p-2(class="sm:p-0")
+      .grid.grid-cols-1(class="md:grid-cols-3")
+        .grid.items-center.relative
+          div
+            .text-left.ml-10.text-4xl.font-bold= data.name
+            .text-left.ml-10.text-lg.text-slate-400="Age: " + data.age
+            .text-left.ml-10.text-lg.text-slate-400="Place: " + data.place
+          .text-slate-400.ml-10.mb-4(class="md:absolute md:bottom-8 md:left-10")= data.date.toDateString()
+        img.col-span-2.w-full.h-96(class='h-5/6' src=`${data.mainImg}`)
+
+      .max-w-4xl.mx-auto.mt-10
+        if user 
+          a(href=`/${page}/edit/${data.slug}`).p-2.ml-0.m-2.bg-sky-600.w-auto Edit 
+          button.Btn.cursor-pointer.bg-red-400.p-2.m-2.w-auto(onclick=('showv()') type='button') Delete
+          #hello.bg-yellow-200.hidden.absolute.right-0.bottom-0.m-1(style="z-index: 1000").w-60
+              .rounded-md
+                .mx-auto.bg-slate-300.p-2
+                  <span class="inline-block text-xl mx-auto iconify" data-icon="material-symbols:check-circle-rounded"></span>
+                  .text-sm.inline-block.ml-3 TrialBallCricketers 
+                .toast-body.p-2
+                  small Are you sure you want to delete
+                  .font-bold= data.name
+                  br
+                  form.d-inline(action=`/${page}/delete/${data.id}?_method=DELETE` method="post")
+                    button.rounded.bg-red-500.p-2(type="submit") Yes
+        .border-b-2.border-slate-700
+        .mt-3.mb-3.font-bold.text-xl Summary
+        .italic.text-slate-700.rounded.p-1
+          = data.summary
+        .border-b-2.border-slate-700
+        .max-w-4xl.p-1.mx-auto.mt-5.prose
+          | !{data.details}  
+      
+      .grid.grid-cols-1(class="md:grid-cols-3").mt-5
+        div(class="w-full col-span-2 p-8")
+          <details class=" open:ring-1 border-2 border-slate-500 open:shadow-lg p-6 rounded-lg">
+            <summary class="text-sm leading-6 text-slate-900 font-semibold select-none">
+              | Comment
+            </summary>
+            <div class="mt-3 text-sm leading-6 text-slate-600">
+              each i in data.comments.reverse()
+                .border-2.border-slate-300.p-3.rounded.mt-3
+                  .text-left.text-xl= i.name
+                  .text-left.text-xl= i.comment
+                  .text-left.mt-3= i.date.toDateString()
+                  if user 
+                    form(action=`/talent-spotting/delete/com/${data.id}/${i.id}?_method=DELETE` method="post")
+                      button(type="submit").text-red-500.p-2 Delete
+            </div>
+          </details>
+
+        .w-full.p-8.h-auto.rounded.mt-9
+          form(action=`/talent-spotting/com/${data.slug}` method='post')
+            label(for="name") 
+              input#name(name="name" type="text" required placeholder="Name").p-2.w-full.rounded.bg-blue-200.text-slate-900
+            label(for="com")
+              textarea#com(name="com" required type="text" placeholder="Comment Here").bg-blue-200.text-slate-900.rounded.p-2.h-28.w-full.mt-4
+            button(type="submit").bg-blue-400.p-1.mt-3.rounded Submit
+  
+
+    .flex-none
+      include _footer.pug
+    script.
+      const sup = document.querySelector('#hello');
+      function showv(){
+      sup.classList.remove('hidden')
+      }

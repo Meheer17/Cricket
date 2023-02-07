@@ -1,0 +1,29 @@
+doctype html
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    meta(http-equiv="X-UA-Compatible", content="IE=edge")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    script(src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp")
+    link(rel="stylesheet" href="/main.css")
+    link(rel="icon" href="/logo.jpg")
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer")
+    title Sign Up
+
+  body.bg-slate-200.min-h-screen(class="flex flex-col")
+    include _nav.pug
+    .cont.mx-auto.mt-10.z-10.grow(class="sm:p-5")
+      .max-w-xl.mx-auto.bg-white.p-10
+        img(src="/logo.jpg", alt="LOGO").border-2.border-slate-900
+        .text-center.mb-6.font-bold.text-2xl.font-serif.italic.text-slate-900 TheTrialBallCricketers
+        form(action="/register" method="post")
+          label.block.text-sm.font-medium.text-slate-900(for='username')
+          input#username.bg-slate-200.border.border-gray-300.text-gray-900.text-sm.block.w-full(name="username" type='text' class='focus:ring-blue-500 focus:border-blue-500 p-2.5' placeholder='Username' required='')
+          label.block.text-sm.font-medium.text-gray-900.mt-2(for='password') 
+          input#password.bg-slate-200.border.border-gray-300.text-gray-900.text-sm.block.w-full(name="password" type='password' class='focus:ring-blue-500 focus:border-blue-500 p-2.5 ray-600 ' placeholder="Password" required='')
+          input#isAdmin(type="checkbox", name="isAdmin") 
+          label.text-sm.font-medium.text-gray-900.mt-2.ml-3(for="isAdmin") Is Admin?
+          button.mt-5.text-white.bg-blue-700.font-medium.text-sm.font-bold.w-full.px-5.text-center(type='submit' class='hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 py-2.5 ') Sign up
+
+    .flex-none
+      include _footer.pug

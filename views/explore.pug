@@ -1,0 +1,53 @@
+doctype html
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    meta(http-equiv="X-UA-Compatible", content="IE=edge")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    script(src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp")
+    link(rel="icon" href="/logo.jpg")
+    link(rel="stylesheet" href="/main.css")
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer")
+    title= page
+
+  body.bg-slate-200.min-h-screen(class="flex flex-col")
+    include _nav.pug
+    .cont.mx-auto.mt-10.z-10.grow(class="sm:p-5 md:p-0").p-3
+      - if (page == "news" || page == "blogs" || page == "gully-cricket-chronicles" || page == "interview")
+        .text-center.font-bold.text-slate-600.text-2xl.uppercase= page
+          .grid.grid-cols-1.gap-4.mt-5(class="md:grid-cols-4")
+            each i in data
+              a(href=`/${page}/read/${i.slug}` class="md:border-0 md:p-0").border-2.border-slate-700.p-2
+                div 
+                  div.overflow-hidden
+                    img.h-48.overflow-hidden.transition.ease.transition-400(class="hover:scale-110 w-full" src=`${i.mainImg}`)
+                .font-bold.mt-4.text-left.text-slate-900.transition-300(class="text-lg block w-full hover:underline")= i.title
+                .text-left.text-gray-600.text-sm.mt-2= i.author
+                .text-left.text-gray-600.text-sm= i.date.toDateString()
+      
+      if page == "video"
+        .text-center.font-bold.text-slate-600.text-2xl VIDEO
+          .grid.grid-cols-1.gap-4.mt-5(class="md:grid-cols-4")
+            each i in data
+              a(href=`/video/watch/${i.slug}` class="md:border-0 md:p-0").border-2.border-slate-700.p-2 
+                div 
+                  div.overflow-hidden
+                    img.h-48.overflow-hidden.transition.ease.transition-400(class="w-full hover:scale-110" src=`https://img.youtube.com/vi/${i.linkimg}/0.jpg` )
+                .font-bold.mt-4.text-left.text-slate-900.transition-300(class="text-lg block w-full hover:underline")= i.title
+                .text-left.text-gray-600.text-sm.mt-2= i.author
+                .text-left.text-gray-600.text-sm= i.date
+
+      if page == "talent-spotting"
+        .text-center.font-bold.text-slate-600.text-2xl.uppercase= page
+          .grid.grid-cols-1.gap-4.mt-5(class="md:grid-cols-4")
+            each i in data
+              a(href=`/talent-spotting/read/${i.slug}` class="md:border-0 md:p-0").border-2.border-slate-700.p-2
+                div 
+                  div.overflow-hidden
+                    img.h-48.overflow-hidden.transition.ease.transition-400(class="w-full hover:scale-110" src=`${i.mainImg}`)
+                .font-bold.mt-4.text-left.text-slate-900.transition-300(class="text-lg block w-full hover:underline")= i.name
+                .text-left.text-gray-600.text-sm.mt-2= i.author
+                .text-left.text-gray-600.text-sm= i.date.toDateString()
+
+    .flex-none
+      include _footer.pug
